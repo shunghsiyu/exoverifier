@@ -7,3 +7,7 @@ __pycache__
 *.leanchecker.out
 *.nanoda.out
 *.trepplein.out
+
+# Lean 4 Lake build artifacts
+.lake/
+lake-packages/
