@@ -126,4 +126,70 @@ theorem or_comm (v₁ v₂ : Fin n → Bool) :
 
 end bitwise
 
+/-! ### Arithmetic operations -/
+section arithmetic
+variable {n : Nat}
+
+/-- Addition. -/
+protected def add (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  ofNat (toNat v₁ + toNat v₂)
+
+/-- Negation. -/
+protected def neg (v : Fin n → Bool) : Fin n → Bool :=
+  ofNat (2^n - toNat v)
+
+/-- Subtraction. -/
+protected def sub (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  ofNat (toNat v₁ + (2^n - toNat v₂))
+
+/-- Multiplication. -/
+protected def mul (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  ofNat (toNat v₁ * toNat v₂)
+
+instance instAddBV : Add (Fin n → Bool) where
+  add := BV.add
+
+instance instNegBV : Neg (Fin n → Bool) where
+  neg := BV.neg
+
+instance instSubBV : Sub (Fin n → Bool) where
+  sub := BV.sub
+
+instance instMulBV : Mul (Fin n → Bool) where
+  mul := BV.mul
+
+-- Basic theorems about arithmetic
+theorem add_to_nat (v₁ v₂ : Fin n → Bool) :
+  toNat (v₁ + v₂) = (toNat v₁ + toNat v₂) % 2^n := by
+  sorry -- Will complete proof later
+
+theorem mul_to_nat (v₁ v₂ : Fin n → Bool) :
+  toNat (v₁ * v₂) = (toNat v₁ * toNat v₂) % 2^n := by
+  sorry -- Will complete proof later
+
+end arithmetic
+
+/-! ### Shift and rotate operations -/
+section shift
+variable {n : Nat}
+
+/-- Logical shift left. -/
+protected def shl (v : Fin n → Bool) (k : Nat) : Fin n → Bool :=
+  ofNat (toNat v * 2^k)
+
+/-- Logical shift right. -/
+protected def lshr (v : Fin n → Bool) (k : Nat) : Fin n → Bool :=
+  ofNat (toNat v / 2^k)
+
+/-- Arithmetic shift right (sign-extend). -/
+protected def ashr (v : Fin n → Bool) (k : Nat) : Fin n → Bool :=
+  if msb v then
+    -- Sign bit is 1, fill with 1s
+    BV.or (BV.lshr v k) (ofNat ((2^n - 1) - (2^(n - k) - 1)))
+  else
+    -- Sign bit is 0, same as logical shift
+    BV.lshr v k
+
+end shift
+
 end BV
