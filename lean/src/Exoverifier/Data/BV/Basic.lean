@@ -86,4 +86,44 @@ theorem zero_eq : (0 : Fin n → Bool) = allFalse := rfl
 
 end const
 
+/-! ### Bitwise operators -/
+section bitwise
+variable {n : Nat}
+
+/-- Bitwise `not`. -/
+protected def not (v : Fin n → Bool) : Fin n → Bool :=
+  fun i => !v i
+
+/-- Bitwise `and`. -/
+protected def and (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  fun i => v₁ i && v₂ i
+
+/-- Bitwise `or`. -/
+protected def or (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  fun i => v₁ i || v₂ i
+
+/-- Bitwise `xor`. -/
+protected def xor (v₁ v₂ : Fin n → Bool) : Fin n → Bool :=
+  fun i => xor (v₁ i) (v₂ i)
+
+@[simp]
+theorem not_not (v : Fin n → Bool) :
+  BV.not (BV.not v) = v := by
+  funext i
+  simp [BV.not]
+
+@[simp]
+theorem and_comm (v₁ v₂ : Fin n → Bool) :
+  BV.and v₁ v₂ = BV.and v₂ v₁ := by
+  funext i
+  simp [BV.and, Bool.and_comm]
+
+@[simp]
+theorem or_comm (v₁ v₂ : Fin n → Bool) :
+  BV.or v₁ v₂ = BV.or v₂ v₁ := by
+  funext i
+  simp [BV.or, Bool.or_comm]
+
+end bitwise
+
 end BV
