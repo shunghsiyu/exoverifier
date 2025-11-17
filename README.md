@@ -10,6 +10,17 @@ to prove safety. Both can produce proofs in Lean's [proof export format](https:/
 and tests may not work on your machine, and it should not yet be relied upon
 for any purpose.**
 
+## 🆕 Lean 4 Migration
+
+**A Lean 4 migration is now available!** The complete structural foundation has been migrated to Lean 4.25.0.
+
+- **Status**: Structure complete, implementations in progress
+- **Quick Start**: See [`lean/QUICKSTART.md`](lean/QUICKSTART.md)
+- **Migration Details**: See [`lean/LEAN4_MIGRATION.md`](lean/LEAN4_MIGRATION.md)
+- **Setup**: Run `./lean/setup-lean4.sh` to install Lean 4 and build
+
+The instructions below are for the original **Lean 3** version.
+
 ## Requirements
 
 - [Lean] community edition, v3.33.0c
