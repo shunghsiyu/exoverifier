@@ -39,6 +39,9 @@ import Exoverifier.Misc.WithTop
 import Exoverifier.SAT.Basic
 import Exoverifier.SAT.CNF
 
+-- AIG (And-Inverter Graph)
+import Exoverifier.AIG.Basic
+
 /-!
 # Exoverifier
 
