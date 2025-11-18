@@ -1,6 +1,10 @@
 -- Data structures
 import Exoverifier.Data.Hashable
 import Exoverifier.Data.Counter
+import Exoverifier.Data.BV.Basic
+
+-- Misc utilities
+import Exoverifier.Misc.Bool
 
 -- SAT solver
 import Exoverifier.SAT.Basic
