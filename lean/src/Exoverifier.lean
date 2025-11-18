@@ -14,13 +14,26 @@ import Exoverifier.Data.BV.Order
 import Exoverifier.Data.BV.Int
 import Exoverifier.Data.BV.All
 
--- Misc utilities
+-- Abstract domains
+import Exoverifier.Data.Domain.Basic
+import Exoverifier.Data.Domain.Trit
+import Exoverifier.Data.Domain.Tnum
+import Exoverifier.Data.Domain.BV
+import Exoverifier.Data.Domain.WrappedInterval
+
+-- Misc utilities (all modules)
 import Exoverifier.Misc.Bool
 import Exoverifier.Misc.Eq
 import Exoverifier.Misc.Fin
+import Exoverifier.Misc.FinEnum
 import Exoverifier.Misc.List
 import Exoverifier.Misc.Option
+import Exoverifier.Misc.OrderedState
+import Exoverifier.Misc.Semidecision
+import Exoverifier.Misc.TestTree
 import Exoverifier.Misc.Vector
+import Exoverifier.Misc.WithBot
+import Exoverifier.Misc.WithTop
 
 -- SAT solver
 import Exoverifier.SAT.Basic
