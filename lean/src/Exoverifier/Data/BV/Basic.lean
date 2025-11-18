@@ -192,4 +192,54 @@ protected def ashr (v : Fin n → Bool) (k : Nat) : Fin n → Bool :=
 
 end shift
 
+/-! ### Relational operators -/
+section relational
+variable {n : Nat}
+
+/-- Unsigned less than. -/
+protected def ult (v₁ v₂ : Fin n → Bool) : Prop :=
+  toNat v₁ < toNat v₂
+
+/-- Unsigned less than or equal. -/
+protected def ule (v₁ v₂ : Fin n → Bool) : Prop :=
+  toNat v₁ ≤ toNat v₂
+
+instance : LT (Fin n → Bool) where
+  lt := BV.ult
+
+instance : LE (Fin n → Bool) where
+  le := BV.ule
+
+instance : DecidableRel (α := Fin n → Bool) (· < ·) :=
+  fun v₁ v₂ => inferInstanceAs (Decidable (toNat v₁ < toNat v₂))
+
+instance : DecidableRel (α := Fin n → Bool) (· ≤ ·) :=
+  fun v₁ v₂ => inferInstanceAs (Decidable (toNat v₁ ≤ toNat v₂))
+
+/-- Signed less than. -/
+protected def slt (v₁ v₂ : Fin n → Bool) : Prop :=
+  (msb v₁ = true ∧ msb v₂ = false) ∨ (msb v₁ = msb v₂ ∧ v₁ < v₂)
+
+/-- Signed less than or equal. -/
+protected def sle (v₁ v₂ : Fin n → Bool) : Prop :=
+  (msb v₁ = true ∧ msb v₂ = false) ∨ (msb v₁ = msb v₂ ∧ v₁ ≤ v₂)
+
+/-- Signed greater than. -/
+@[reducible]
+protected def sgt (v₁ v₂ : Fin n → Bool) : Prop :=
+  BV.slt v₂ v₁
+
+/-- Signed greater than or equal. -/
+@[reducible]
+protected def sge (v₁ v₂ : Fin n → Bool) : Prop :=
+  BV.sle v₂ v₁
+
+instance : DecidableRel (α := Fin n → Bool) BV.slt :=
+  fun _ _ => by unfold BV.slt; infer_instance
+
+instance : DecidableRel (α := Fin n → Bool) BV.sle :=
+  fun _ _ => by unfold BV.sle; infer_instance
+
+end relational
+
 end BV
