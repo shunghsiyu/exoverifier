@@ -41,6 +41,7 @@ import Exoverifier.SAT.CNF
 
 -- AIG (And-Inverter Graph)
 import Exoverifier.AIG.Basic
+import Exoverifier.AIG.Rewrite
 
 /-!
 # Exoverifier
