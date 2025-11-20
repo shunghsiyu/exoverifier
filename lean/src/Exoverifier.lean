@@ -1,6 +1,7 @@
 -- Data structures
 import Exoverifier.Data.Hashable
 import Exoverifier.Data.Counter
+import Exoverifier.Data.Option.Order
 
 -- Bitvector operations (all modules)
 import Exoverifier.Data.BV.Basic
